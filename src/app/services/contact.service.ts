@@ -12,11 +12,11 @@ const httpOptions = {
 @Injectable()
 export class ContactService {
 
-  private contactUrl = 'api/contacts';
+  private contactUrl = 'api/contacts'; //WebApi URL
 
   constructor(
     private http: HttpClient) { }
-
+  
   public getContacts() {
     return Observable.of(CONTACTS);
     // return this.http.get<Contact[]>(this.contactUrl)
