@@ -1,0 +1,49 @@
+<div class="container" *ngIf="!isDeleteFirst">
+    <div class="title">
+        <h4> List of Contacts</h4>
+    </div>
+    <div class="add-contact">
+        <button class="btn" routerLink="/addContact"> Add New Contact </button>
+    </div>
+    <table class="table table-striped" *ngIf="contacts.length > 0">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contact of contacts">
+                <td>{{contact.firstName}}</td>
+                <td>{{contact.lastName}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.phone}}</td>
+                <td>{{contact.status}}</td>
+                <td>
+                    <a routerLink="{{contact.id}}">Edit</a>
+                </td>
+                <td>
+                    <a (click)="delete(contact)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="contacts.length === 0">
+        <h3> No Records Avaialble </h3>
+    </div>
+</div>
+<div class="container" *ngIf="isDeleteFirst">
+    <div class="title">
+        <h4> Delete Contact</h4>
+    </div>
+    <div>
+        Please click confirm to delete {{deleteContact.firstName}}
+        <button class="btn" (click)="confirmDelete()"> Confirm </button>
+        <button class="btn" (click)="cancelDelete()"> Cancel </button>
+    </div>
+</div>

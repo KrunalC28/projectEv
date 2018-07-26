@@ -1,0 +1,66 @@
+<div class="container contact-form">
+    <div class="title">
+        <h4> Contact Form </h4>
+        <span>(*) Required Fields</span>
+    </div>
+    <div class="back">
+        <button class="btn" routerLink="/contacts"> Back to List </button>
+    </div>
+    <form #rform="ngForm" [formGroup]="contactForm" (ngSubmit)="rform.valid && register(contactForm)">
+        <div class="form-group" [ngClass]="{'has-error' :
+              ((contactForm.get('firstName').touched || contactForm.get('firstName').dirty) 
+              && (!contactForm.get('firstName').valid)) }">
+            <label for="firstNameId">First Name*</label>
+            <input class="form-control" type="text" formControlName="firstName" placeholder="First Name" />
+            <div class="help-block" *ngIf="(contactForm.get('firstName').touched || contactForm.get('firstName').dirty) && contactForm.get('firstName').errors">
+                <span *ngIf="contactForm.get('firstName').errors?.required">First name is Required</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error' :
+              ((contactForm.get('lastName').touched || contactForm.get('lastName').dirty) 
+              && (!contactForm.get('lastName').valid)) }">
+            <label for="lastNameId">Last Name*</label>
+            <input class="form-control" type="text" formControlName="lastName" placeholder="Last Name" />
+            <div class="help-block" *ngIf="(contactForm.get('lastName').touched || contactForm.get('lastName').dirty) && contactForm.get('lastName').errors">
+                <span *ngIf="contactForm.get('lastName').errors?.required">Last name is Required</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error' :
+              ((contactForm.get('email').touched || contactForm.get('email').dirty) 
+              && (!contactForm.get('email').valid)) }">
+            <label for="emailId">Email*</label>
+            <input class="form-control" type="email" formControlName="email" placeholder="Email" />
+            <div class="help-block" *ngIf="(contactForm.get('email').touched || contactForm.get('email').dirty) && contactForm.get('email').errors">
+                <span *ngIf="contactForm.get('email').errors?.required">Email is Required</span>
+                <span *ngIf="contactForm.get('email').errors?.pattern">Email is not valid</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error' :
+              ((contactForm.get('phone').touched || contactForm.get('phone').dirty) 
+              && (!contactForm.get('phone').valid)) }">
+            <label for="phoneId">Phone*</label>
+            <input class="form-control" type="number" formControlName="phone" placeholder="Phone" />
+            <div class="help-block" *ngIf="(contactForm.get('phone').touched || contactForm.get('phone').dirty) && contactForm.get('phone').errors">
+                <span *ngIf="contactForm.get('phone').errors?.required">Phone is Required</span>
+                <span *ngIf="contactForm.get('phone').errors?.minLength">Phone number must be 10 digit</span>
+                <span *ngIf="contactForm.get('phone').errors?.maxLength">Phone number must be 10 digit</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error' :
+              ((contactForm.get('status').touched || contactForm.get('status').dirty) 
+              && (!contactForm.get('status').valid)) }">
+            <label for="sexId">Status*</label>
+            <select class="form-control" required name="status" formControlName="status">
+                <option selected disabled value="select a status">Select a status</option>
+                <option value='active'> Active </option>
+                <option value='Inactive'> Inactive </option>
+            </select>
+            <div class="help-block" *ngIf="(contactForm.get('status').touched || contactForm.get('status').dirty) && contactForm.get('status').errors">
+                <span *ngIf="contactForm.get('status').errors?.required">Status is Required</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn" [disabled]="!contactForm.valid"> Add Contact </button>
+        </div>
+    </form>
+</div>
